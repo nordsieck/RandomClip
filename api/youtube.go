@@ -1,10 +1,10 @@
 package api
 
 import (
-	"fmt"
-	"io/ioutil"
 	"net/http"
 	"net/url"
+
+	"github.com/nordsieck/defect"
 )
 
 const (
@@ -16,6 +16,8 @@ const (
 	PlaylistID     = "playlistId"
 	MaxResults     = "maxResults"
 	PageToken      = "pageToken"
+
+	ErrDeserializeInput = defect.Error("Unable to deserialize input")
 )
 
 func PlaylistVideos(key, playlist string) ([]string, error) {
@@ -31,12 +33,9 @@ func PlaylistVideos(key, playlist string) ([]string, error) {
 	}
 	defer resp.Body.Close()
 
-	body, err := ioutil.ReadAll(resp.Body)
+	pl, err := DeserializePlaylist(resp.Body)
 	if err != nil {
 		return nil, err
 	}
-
-	fmt.Println(string(body))
-
-	return nil, nil
+	return pl.VideoIDs(), nil
 }

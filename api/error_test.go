@@ -39,3 +39,17 @@ func TestErrorUnmarshal(t *testing.T) {
 		},
 	})
 }
+
+func TestErrorDetail_String(t *testing.T) {
+	ed := ErrorDetail{
+		Domain:       "a",
+		Reason:       "b",
+		Message:      "c",
+		ExtendedHelp: "d",
+	}
+	s := ed.String()
+	defect.Equal(t, s, `Domain: a
+Reason: b
+Message: c
+ExtendedHelp: d`)
+}

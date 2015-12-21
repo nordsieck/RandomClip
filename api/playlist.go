@@ -2,15 +2,18 @@ package api
 
 import (
 	"encoding/json"
+	"fmt"
 	"io"
 	"io/ioutil"
 )
 
 type Playlist struct {
-	Kind     string   `json:"kind"`
-	ETag     string   `json:"etag"`
-	PageInfo PageInfo `json:"pageInfo"`
-	Items    []Item   `json:"items"`
+	Kind          string   `json:"kind"`
+	ETag          string   `json:"etag"`
+	NextPageToken string   `json:"nextPageToken"`
+	PrevPageToken string   `json:"prevPageToken"`
+	PageInfo      PageInfo `json:"pageInfo"`
+	Items         []Item   `json:"items"`
 }
 
 func (p *Playlist) IsZero() bool {
@@ -48,6 +51,8 @@ func DeserializePlaylist(body io.Reader) (*Playlist, error) {
 	if err != nil {
 		return nil, err
 	}
+
+	fmt.Println(string(bodyBytes))
 
 	var pl Playlist
 	err = json.Unmarshal(bodyBytes, &pl)

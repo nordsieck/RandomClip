@@ -10,71 +10,75 @@ import (
 
 const playlistExample = `{
  "kind": "youtube#playlistItemListResponse",
- "etag": "\"kuL0kDMAqRo3pU7O0pwlO-Lfzp4/i1ORKHHBLiGYbgwmVrbz1HTnjiM\"",
+ "etag": "\"kuL0kDMAqRo3pU7O0pwlO-Lfzp4/npdqJe-4vvFRFapzc8fzhv0TW-8\"",
+ "nextPageToken": "CAgQAA",
+ "prevPageToken": "CAQQAQ",
  "pageInfo": {
-  "totalResults": 4,
-  "resultsPerPage": 50
+  "totalResults": 78,
+  "resultsPerPage": 4
  },
  "items": [
   {
    "kind": "youtube#playlistItem",
-   "etag": "\"kuL0kDMAqRo3pU7O0pwlO-Lfzp4/pxjefDqZZB28ihx1tU6Lacs3OWI\"",
-   "id": "PLTNzmeZSD6S8fiu_sThS48yscKcogb0k1XR5NFcpZmTQ",
+   "etag": "\"kuL0kDMAqRo3pU7O0pwlO-Lfzp4/ya8nbnto-i637Rin-EyoqbKg-vI\"",
+   "id": "PLox-BzA6rjaZF4rFbXwqaC7vpIq5hmYL0_017yrOjtrw",
    "contentDetails": {
-    "videoId": "WSrktmE963I"
+    "videoId": "h_hOQAZHy1A"
    }
   },
   {
    "kind": "youtube#playlistItem",
-   "etag": "\"kuL0kDMAqRo3pU7O0pwlO-Lfzp4/xz1RoE48BdkfF8HOBj9a1KxpYMc\"",
-   "id": "PLTNzmeZSD6S8fiu_sThS48w1IS2M_ryLbIL_lPto-mTk",
+   "etag": "\"kuL0kDMAqRo3pU7O0pwlO-Lfzp4/EFau6eavCwIvHjYMq4rYSJjbkAA\"",
+   "id": "PLox-BzA6rjaZF4rFbXwqaC4tnYN92LGpTcN3LZFkgS0g",
    "contentDetails": {
-    "videoId": "9Sc-ir2UwGU"
+    "videoId": "FUak2C_KEeU"
    }
   },
   {
    "kind": "youtube#playlistItem",
-   "etag": "\"kuL0kDMAqRo3pU7O0pwlO-Lfzp4/yXbzH0XnN3u8VaUs7mlOIYVm8DE\"",
-   "id": "PLTNzmeZSD6S8fiu_sThS48_DAMTUiMurXx53dT5nYfRM",
+   "etag": "\"kuL0kDMAqRo3pU7O0pwlO-Lfzp4/twrX_a-7puSBmUACFUmGBybhbCQ\"",
+   "id": "PLox-BzA6rjaZF4rFbXwqaC3bnDWpreH-2b2H8pfQ9Pgw",
    "contentDetails": {
-    "videoId": "3gPknJGnmUw"
+    "videoId": "D6DFLNa6MBA"
    }
   },
   {
    "kind": "youtube#playlistItem",
-   "etag": "\"kuL0kDMAqRo3pU7O0pwlO-Lfzp4/r1OcCvTmqZsPaCN87eRmaCmrUQY\"",
-   "id": "PLTNzmeZSD6S8fiu_sThS48xP4kf4RUpRQKSduLV2-2SY",
+   "etag": "\"kuL0kDMAqRo3pU7O0pwlO-Lfzp4/_2Cral9lBX6QegayYW7B1gTVxFs\"",
+   "id": "PLox-BzA6rjaZF4rFbXwqaC8NShPDo3RtU_xbBUgMJv3A",
    "contentDetails": {
-    "videoId": "PCcxMQoHznA"
+    "videoId": "gCJ3rmiZFr8"
    }
   }
  ]
 }`
 
 var expectedPlaylist = Playlist{
-	Kind:     "youtube#playlistItemListResponse",
-	ETag:     "\"kuL0kDMAqRo3pU7O0pwlO-Lfzp4/i1ORKHHBLiGYbgwmVrbz1HTnjiM\"",
-	PageInfo: PageInfo{TotalResults: 4, ResultsPerPage: 50},
+	Kind:          "youtube#playlistItemListResponse",
+	ETag:          "\"kuL0kDMAqRo3pU7O0pwlO-Lfzp4/npdqJe-4vvFRFapzc8fzhv0TW-8\"",
+	NextPageToken: "CAgQAA",
+	PrevPageToken: "CAQQAQ",
+	PageInfo:      PageInfo{TotalResults: 78, ResultsPerPage: 4},
 	Items: []Item{{
 		Kind:           "youtube#playlistItem",
-		ETag:           "\"kuL0kDMAqRo3pU7O0pwlO-Lfzp4/pxjefDqZZB28ihx1tU6Lacs3OWI\"",
-		ID:             "PLTNzmeZSD6S8fiu_sThS48yscKcogb0k1XR5NFcpZmTQ",
-		ContentDetails: Details{VideoID: "WSrktmE963I"},
+		ETag:           "\"kuL0kDMAqRo3pU7O0pwlO-Lfzp4/ya8nbnto-i637Rin-EyoqbKg-vI\"",
+		ID:             "PLox-BzA6rjaZF4rFbXwqaC7vpIq5hmYL0_017yrOjtrw",
+		ContentDetails: Details{VideoID: "h_hOQAZHy1A"},
 	}, {
 		Kind:           "youtube#playlistItem",
-		ETag:           "\"kuL0kDMAqRo3pU7O0pwlO-Lfzp4/xz1RoE48BdkfF8HOBj9a1KxpYMc\"",
-		ID:             "PLTNzmeZSD6S8fiu_sThS48w1IS2M_ryLbIL_lPto-mTk",
-		ContentDetails: Details{VideoID: "9Sc-ir2UwGU"},
+		ETag:           "\"kuL0kDMAqRo3pU7O0pwlO-Lfzp4/EFau6eavCwIvHjYMq4rYSJjbkAA\"",
+		ID:             "PLox-BzA6rjaZF4rFbXwqaC4tnYN92LGpTcN3LZFkgS0g",
+		ContentDetails: Details{VideoID: "FUak2C_KEeU"},
 	}, {
 		Kind:           "youtube#playlistItem",
-		ETag:           "\"kuL0kDMAqRo3pU7O0pwlO-Lfzp4/yXbzH0XnN3u8VaUs7mlOIYVm8DE\"",
-		ID:             "PLTNzmeZSD6S8fiu_sThS48_DAMTUiMurXx53dT5nYfRM",
-		ContentDetails: Details{VideoID: "3gPknJGnmUw"},
+		ETag:           "\"kuL0kDMAqRo3pU7O0pwlO-Lfzp4/twrX_a-7puSBmUACFUmGBybhbCQ\"",
+		ID:             "PLox-BzA6rjaZF4rFbXwqaC3bnDWpreH-2b2H8pfQ9Pgw",
+		ContentDetails: Details{VideoID: "D6DFLNa6MBA"},
 	}, {
 		Kind:           "youtube#playlistItem",
-		ETag:           "\"kuL0kDMAqRo3pU7O0pwlO-Lfzp4/r1OcCvTmqZsPaCN87eRmaCmrUQY\"",
-		ID:             "PLTNzmeZSD6S8fiu_sThS48xP4kf4RUpRQKSduLV2-2SY",
-		ContentDetails: Details{VideoID: "PCcxMQoHznA"},
+		ETag:           "\"kuL0kDMAqRo3pU7O0pwlO-Lfzp4/_2Cral9lBX6QegayYW7B1gTVxFs\"",
+		ID:             "PLox-BzA6rjaZF4rFbXwqaC8NShPDo3RtU_xbBUgMJv3A",
+		ContentDetails: Details{VideoID: "gCJ3rmiZFr8"},
 	}},
 }
 

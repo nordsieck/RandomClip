@@ -1,8 +1,10 @@
 package main
 
 import (
+	"crypto/rand"
 	"flag"
 	"fmt"
+	"math/big"
 	"time"
 
 	"github.com/nordsieck/randomclip/api"
@@ -29,5 +31,18 @@ func main() {
 
 	_ = duration
 
-	fmt.Println(api.PlaylistVideos(*rawKey, *rawPlaylist))
+	videos, err := api.PlaylistVideos(*rawKey, *rawPlaylist)
+	if err != nil {
+		fmt.Println(err)
+		return
+	}
+
+	n, err := rand.Int(rand.Reader, big.NewInt(int64(len(videos))))
+	if err != nil {
+		fmt.Println(err)
+		return
+	}
+	video := videos[int(n.Int64())]
+
+	fmt.Println(video)
 }

@@ -18,6 +18,8 @@ const (
 	PageToken      = "pageToken"
 
 	ErrDeserializeInput = defect.Error("Unable to deserialize input")
+
+	MaxPlaylistItems = "50" // max value allowed: https://developers.google.com/youtube/v3/docs/playlistItems/list
 )
 
 func GetPlaylistFragment(key, playlist, token string) (videoIDs []string, pageToken string, e error) {
@@ -25,7 +27,7 @@ func GetPlaylistFragment(key, playlist, token string) (videoIDs []string, pageTo
 		Key:        {key},
 		Part:       {ContentDetails},
 		PlaylistID: {playlist},
-		MaxResults: {"4"}, // max value allowed: https://developers.google.com/youtube/v3/docs/playlistItems/list
+		MaxResults: {MaxPlaylistItems},
 	}
 	if token != "" {
 		params[PageToken] = []string{token}
@@ -47,20 +49,19 @@ func GetPlaylistFragment(key, playlist, token string) (videoIDs []string, pageTo
 func PlaylistVideos(key, playlist string) ([]string, error) {
 	fullList := []string{}
 
-	list, token, err := GetPlaylistFragment(key, playlist, "")
-	if err != nil {
-		return nil, err
+	token := ""
+	for {
+		var list []string
+		var err error
+		list, token, err = GetPlaylistFragment(key, playlist, token)
+		if err != nil {
+			return nil, err
+		}
+		fullList = append(fullList, list...)
+		if token == "" {
+			break
+		}
 	}
-	fullList = append(fullList, list...)
-	if token == "" {
-		return fullList, nil
-	}
-
-	list, token, err = GetPlaylistFragment(key, playlist, token)
-	if err != nil {
-		return nil, err
-	}
-	fullList = append(fullList, list...)
 
 	return fullList, nil
 }
